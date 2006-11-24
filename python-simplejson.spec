@@ -1,8 +1,8 @@
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           python-simplejson
-Version:        1.3
-Release:        4%{?dist}
+Version:        1.4
+Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -59,6 +59,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Nov 24 2006 Luke Macken <lmacken@redhat.com> - 1.4-1
+- 1.4
+
 * Sun Sep  3 2006 Luke Macken <lmacken@redhat.com> - 1.3-4
 - Rebuild for FC6
 
