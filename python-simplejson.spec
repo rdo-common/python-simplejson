@@ -2,7 +2,7 @@
 
 Name:           python-simplejson
 Version:        1.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -12,7 +12,7 @@ Source0:        http://cheeseshop.python.org/packages/source/s/simplejson/simple
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-BuildRequires:  python-setuptools
+BuildRequires:  python-setuptools python-devel
 
 %description
 simplejson is a simple, fast, complete, correct and extensible
@@ -59,6 +59,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Dec  9 2006 Luke Macken <lmacken@redhat.com> - 1.4-3
+- Add python-devel to BuildRequires
+
 * Sat Dec  9 2006 Luke Macken <lmacken@redhat.com> - 1.4-2
 - Rebuild for new python
 
