@@ -2,7 +2,7 @@
 
 Name:           python-simplejson
 Version:        1.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -59,6 +59,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Dec  9 2006 Luke Macken <lmacken@redhat.com> - 1.4-2
+- Rebuild for new python
+
 * Fri Nov 24 2006 Luke Macken <lmacken@redhat.com> - 1.4-1
 - 1.4
 
