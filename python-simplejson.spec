@@ -1,8 +1,10 @@
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
+%{!?pyver: %define pyver %(%{__python} -c "import sys ; print sys.version[:3]")}
+
 
 Name:           python-simplejson
 Version:        1.4
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -53,13 +55,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc docs
 %dir %{python_sitelib}/simplejson
-%{python_sitelib}/simplejson-%{version}-py2.4.egg-info
+%{python_sitelib}/simplejson-%{version}-py%{pyver}.egg-info
 %{python_sitelib}/simplejson/*.py*
 %{python_sitelib}/simplejson/tests/*.py*
 
 
 %changelog
-* Sat Dec  9 2006 Luke Macken <lmacken@redhat.com> - 1.4-3
+* Sat Dec  9 2006 Luke Macken <lmacken@redhat.com> - 1.4-4
 - Add python-devel to BuildRequires
 
 * Sat Dec  9 2006 Luke Macken <lmacken@redhat.com> - 1.4-2
