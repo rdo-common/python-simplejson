@@ -3,8 +3,8 @@
 
 
 Name:           python-simplejson
-Version:        1.4
-Release:        4%{?dist}
+Version:        1.5
+Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -61,6 +61,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Mar  3 2007 Luke Macken <lmacken@redhat.com> - 1.5
+- 1.5
+
 * Sat Dec  9 2006 Luke Macken <lmacken@redhat.com> - 1.4-4
 - Add python-devel to BuildRequires
 
