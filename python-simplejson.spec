@@ -3,7 +3,7 @@
 
 
 Name:           python-simplejson
-Version:        1.5
+Version:        1.7
 Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
@@ -12,7 +12,6 @@ License:        MIT
 URL:            http://undefined.org/python/#simplejson
 Source0:        http://cheeseshop.python.org/packages/source/s/simplejson/simplejson-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildArch:      noarch
 
 BuildRequires:  python-setuptools python-devel
 
@@ -58,9 +57,13 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitelib}/simplejson-%{version}-py%{pyver}.egg-info
 %{python_sitelib}/simplejson/*.py*
 %{python_sitelib}/simplejson/tests/*.py*
+%{python_sitelib}/simplejson/_speedups.so
 
 
 %changelog
+* Tue Mar 20 2007 Luke Macken <lmacken@redhat.com> - 1.7
+- 1.7 (Bug #233212)
+
 * Sat Mar  3 2007 Luke Macken <lmacken@redhat.com> - 1.5
 - 1.5
 
