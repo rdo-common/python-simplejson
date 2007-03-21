@@ -1,10 +1,9 @@
-%{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 %{!?pyver: %define pyver %(%{__python} -c "import sys ; print sys.version[:3]")}
-
+%{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:           python-simplejson
 Version:        1.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -53,15 +52,18 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc docs
-%dir %{python_sitelib}/simplejson
-%{python_sitelib}/simplejson-%{version}-py%{pyver}.egg-info
-%{python_sitelib}/simplejson/*.py*
-%{python_sitelib}/simplejson/tests/*.py*
-%{python_sitelib}/simplejson/_speedups.so
+%dir %{python_sitearch}/simplejson
+%{python_sitearch}/simplejson-%{version}-py%{pyver}.egg-info
+%{python_sitearch}/simplejson/*.py*
+%{python_sitearch}/simplejson/tests/*.py*
+%{python_sitearch}/simplejson/_speedups.so
 
 
 %changelog
-* Tue Mar 20 2007 Luke Macken <lmacken@redhat.com> - 1.7
+* Wed Mar 21 2007 Luke Macken <lmacken@redhat.com> - 1.7-2
+- Use python_sitearch instead of sitelib
+
+* Tue Mar 20 2007 Luke Macken <lmacken@redhat.com> - 1.7-1
 - 1.7 (Bug #233212)
 
 * Sat Mar  3 2007 Luke Macken <lmacken@redhat.com> - 1.5
