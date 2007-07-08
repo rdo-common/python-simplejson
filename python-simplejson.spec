@@ -2,8 +2,8 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:           python-simplejson
-Version:        1.7
-Release:        2%{?dist}
+Version:        1.7.1
+Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -60,6 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Jul  8 2007 Luke Macken <lmacken@redhat.com> - 1.7.1-1
+- 1.7.1
+
 * Wed Mar 21 2007 Luke Macken <lmacken@redhat.com> - 1.7-2
 - Use python_sitearch instead of sitelib
 
