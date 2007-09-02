@@ -3,7 +3,7 @@
 
 Name:           python-simplejson
 Version:        1.7.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -12,7 +12,13 @@ URL:            http://undefined.org/python/#simplejson
 Source0:        http://cheeseshop.python.org/packages/source/s/simplejson/simplejson-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  python-setuptools python-devel
+BuildRequires:  python-devel
+%if 0%{?fedora} >= 8
+BuildRequires: python-setuptools-devel
+%else
+BuildRequires: python-setuptools
+%endif
+
 
 %description
 simplejson is a simple, fast, complete, correct and extensible
@@ -60,6 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Sep  2 2007 Luke Macken <lmacken@redhat.com> - 1.7.1-3
+- Update for python-setuptools changes in rawhide
+
 * Tue Aug 21 2007 Luke Macken <lmacken@redhat.com> - 1.7.1-2
 - Rebuild
 
