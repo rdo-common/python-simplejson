@@ -2,8 +2,8 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:           python-simplejson
-Version:        1.7.1
-Release:        3%{?dist}
+Version:        1.7.3
+Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -13,11 +13,7 @@ Source0:        http://cheeseshop.python.org/packages/source/s/simplejson/simple
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  python-devel
-%if 0%{?fedora} >= 8
 BuildRequires: python-setuptools-devel
-%else
-BuildRequires: python-setuptools
-%endif
 
 
 %description
@@ -66,6 +62,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct  3 2007 Luke Macken <lmacken@redhat.com> - 1.7.3-1
+- 1.7.3
+
 * Sun Sep  2 2007 Luke Macken <lmacken@redhat.com> - 1.7.1-3
 - Update for python-setuptools changes in rawhide
 
