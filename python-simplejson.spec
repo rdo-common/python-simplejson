@@ -3,7 +3,7 @@
 
 Name:           python-simplejson
 Version:        1.7.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -53,7 +53,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc docs
+%doc docs LICENSE.txt
 %dir %{python_sitearch}/simplejson
 %{python_sitearch}/simplejson-%{version}-py%{pyver}.egg-info
 %{python_sitearch}/simplejson/*.py*
@@ -62,6 +62,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 24 2007 Luke Macken <lmacken@redhat.com> - 1.7.3-2
+- Include the LICENSE.txt
+
 * Wed Oct  3 2007 Luke Macken <lmacken@redhat.com> - 1.7.3-1
 - 1.7.3
 
