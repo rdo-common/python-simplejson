@@ -2,7 +2,7 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:           python-simplejson
-Version:        1.8.1
+Version:        1.9.1
 Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
@@ -62,6 +62,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue May 06 2008 Luke Macken <lmacken@redhat.com> - 1.9.1-1
+- Update to 1.9.1
+
 * Wed Apr 02 2008 Luke Macken <lmacken@redhat.com> - 1.8.1-1
 - Update to 1.8.1
 
