@@ -3,7 +3,7 @@
 
 Name:           python-simplejson
 Version:        2.0.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -14,6 +14,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  python-devel
 BuildRequires:  python-setuptools-devel
+BuildRequires:  python-nose
 
 
 %description
@@ -46,6 +47,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install -O1 --skip-build --root=$RPM_BUILD_ROOT \
                                  --single-version-externally-managed
 
+%check
+nosetests -q
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -62,6 +65,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Oct 23 2008 Luke Macken <lmacken@redhat.com> 2.0.3-2
+- Use nose to run the simplejson test suite
+
 * Mon Oct 20 2008 Tom "spot" Callaway <tcallawa@redhat.com> 2.0.3-1
 - update to 2.0.3
 
