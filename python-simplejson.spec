@@ -3,7 +3,7 @@
 
 Name:           python-simplejson
 Version:        2.0.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -65,6 +65,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Nov 29 2008 Ignacio Vazquez-Abrams <ivazqueznet+rpm@gmail.com> - 2.0.3-3
+- Rebuild for Python 2.6
+
 * Thu Oct 23 2008 Luke Macken <lmacken@redhat.com> 2.0.3-2
 - Use nose to run the simplejson test suite
 
