@@ -2,8 +2,8 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:           python-simplejson
-Version:        2.0.3
-Release:        3%{?dist}
+Version:        2.0.7
+Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -65,6 +65,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Jan 06 2009 Luke Macken <lmacken@redhat.com> 2.0.7-1
+- Update to 2.0.7
+
 * Sat Nov 29 2008 Ignacio Vazquez-Abrams <ivazqueznet+rpm@gmail.com> - 2.0.3-3
 - Rebuild for Python 2.6
 
