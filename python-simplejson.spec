@@ -66,7 +66,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Thu Jun  4 2009 Kyle VanderBeek <kylev@kylev-lt> - 2.0.9-1
+* Thu Jun  4 2009 Kyle VanderBeek <kylev@kylev.com> - 2.0.9-1
 - Update to 2.0.9
 - Make sure to require gcc to the speedups get compiled
 - Fix description since we're not "pure" python
