@@ -3,7 +3,7 @@
 
 Name:           python-simplejson
 Version:        2.0.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -15,7 +15,6 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  python-devel
 BuildRequires:  python-setuptools-devel
 BuildRequires:  python-nose
-BuildRequires:  gcc
 
 
 %description
@@ -66,6 +65,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jun  5 2009 Kyle VanderBeek <kylev@kylev.com> - 2.0.9-2
+- Remove ill-advised gcc BuildRequires
+
 * Thu Jun  4 2009 Kyle VanderBeek <kylev@kylev.com> - 2.0.9-1
 - Update to 2.0.9
 - Make sure to require gcc to the speedups get compiled
