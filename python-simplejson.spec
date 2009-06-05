@@ -2,25 +2,26 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:           python-simplejson
-Version:        2.0.7
-Release:        2%{?dist}
+Version:        2.0.9
+Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
 License:        MIT
 URL:            http://undefined.org/python/#simplejson
-Source0:        http://cheeseshop.python.org/packages/source/s/simplejson/simplejson-%{version}.tar.gz
+Source0:        http://pypi.python.org/packages/source/s/simplejson/simplejson-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  python-devel
 BuildRequires:  python-setuptools-devel
 BuildRequires:  python-nose
+BuildRequires:  gcc
 
 
 %description
-simplejson is a simple, fast, complete, correct and extensible
-JSON <http://json.org> encoder and decoder for Python 2.3+.  It is
-pure Python code with no dependencies.
+simplejson is a simple, fast, complete, correct and extensible JSON
+<http://json.org> encoder and decoder for Python 2.4+.  It has no
+external dependencies.
 
 simplejson was formerly known as simple_json, but changed its name to
 comply with PEP 8 module naming guidelines.
@@ -65,6 +66,12 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Jun  4 2009 Kyle VanderBeek <kylev@kylev-lt> - 2.0.9-1
+- Update to 2.0.9
+- Make sure to require gcc to the speedups get compiled
+- Fix description since we're not "pure" python
+- Change to pypi instead of cheesehop
+
 * Thu Feb 26 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0.7-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
 
