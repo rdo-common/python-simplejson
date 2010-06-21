@@ -2,8 +2,8 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:           python-simplejson
-Version:        2.0.9
-Release:        3%{?dist}
+Version:        2.1.1
+Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -19,19 +19,20 @@ BuildRequires:  python-nose
 
 %description
 simplejson is a simple, fast, complete, correct and extensible JSON
-<http://json.org> encoder and decoder for Python 2.4+.  It has no
-external dependencies.
+<http://json.org> encoder and decoder for Python 2.5+. It is pure Python code
+with no dependencies, but includes an optional C extension for a serious speed
+boost.
 
-simplejson was formerly known as simple_json, but changed its name to
-comply with PEP 8 module naming guidelines.
+simplejson is the externally maintained development version of the json library
+included with Python 2.6 and Python 3.0, but maintains backwards compatibility
+with Python 2.5.
 
 The encoder may be subclassed to provide serialization in any kind of
 situation, without any special support by the objects to be serialized
 (somewhat like pickle).
 
-The decoder can handle incoming JSON strings of any specified encoding
-(UTF-8 by default).
-
+The decoder can handle incoming JSON strings of any specified encoding (UTF-8
+by default).
 
 
 %prep
@@ -65,6 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Jun 21 2010 Kyle VanderBeek <kylev@kylev.com> - 2.1.1-1
+- Update to 2.1.1
+
 * Sun Jul 26 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0.9-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
