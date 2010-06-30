@@ -1,13 +1,21 @@
-%{!?pyver: %define pyver %(%{__python} -c "import sys ; print sys.version[:3]")}
-%{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
+%if 0%{?fedora} < 13 || 0%{?rhel} < 6
+%{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
+%endif
+
+%global _use_internal_dependency_generator 0
+%global __find_provides /bin/sh -c "%{_rpmconfigdir}/find-provides | grep -v -E '(_speedups.so)' || /bin/true"
+%global __find_requires /bin/sh -c "%{_rpmconfigdir}/find-requires | grep -v -E '(_speedups.so)' || /bin/true"
 
 Name:           python-simplejson
+
 Version:        2.1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
-License:        MIT
+# The main code is licensed MIT.
+# The docs include jquery which is licensed MIT or GPLv2
+License: MIT and (MIT or GPLv2)
 URL:            http://undefined.org/python/#simplejson
 Source0:        http://pypi.python.org/packages/source/s/simplejson/simplejson-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -45,8 +53,7 @@ by default).
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__python} setup.py install -O1 --skip-build --root=$RPM_BUILD_ROOT \
-                                 --single-version-externally-managed
+%{__python} setup.py install --skip-build --root=$RPM_BUILD_ROOT
 
 %check
 nosetests -q
@@ -59,13 +66,18 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc docs LICENSE.txt
 %dir %{python_sitearch}/simplejson
-%{python_sitearch}/simplejson-%{version}-py%{pyver}.egg-info
+%{python_sitearch}/simplejson-*.egg-info
 %{python_sitearch}/simplejson/*.py*
 %{python_sitearch}/simplejson/tests/*.py*
 %{python_sitearch}/simplejson/_speedups.so
 
 
 %changelog
+* Wed Jun 30 2010 Toshio Kuratomi <toshio@fedoraproject.org> - 2.1.1-2
+- Filter unnecessary provides
+- License tag update
+- Minor spec file cleanups
+
 * Mon Jun 21 2010 Kyle VanderBeek <kylev@kylev.com> - 2.1.1-1
 - Update to 2.1.1
 
