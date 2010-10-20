@@ -2,14 +2,10 @@
 %{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 %endif
 
-%global _use_internal_dependency_generator 0
-%global __find_provides /bin/sh -c "%{_rpmconfigdir}/find-provides | grep -v -E '(_speedups.so)' || /bin/true"
-%global __find_requires /bin/sh -c "%{_rpmconfigdir}/find-requires | grep -v -E '(_speedups.so)' || /bin/true"
-
 Name:           python-simplejson
 
 Version:        2.1.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -23,6 +19,13 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  python-devel
 BuildRequires:  python-setuptools-devel
 BuildRequires:  python-nose
+
+
+# we don't want to provide private python extension libs
+%{?filter_setup:
+%filter_provides_in %{python_sitearch}/.*\.so$ 
+%filter_setup
+}
 
 
 %description
@@ -65,14 +68,14 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc docs LICENSE.txt
-%dir %{python_sitearch}/simplejson
-%{python_sitearch}/simplejson-*.egg-info
-%{python_sitearch}/simplejson/*.py*
-%{python_sitearch}/simplejson/tests/*.py*
-%{python_sitearch}/simplejson/_speedups.so
+%{python_sitearch}/*
 
 
 %changelog
+* Wed Oct 20 2010 Toshio Kuratomi <toshoi@fedoraproject.org> - 2.1.1-4
+- Simplify the %%files section to own the tests directory
+- Use the fedora documented filter functions to filter provides
+
 * Thu Jul 22 2010 David Malcolm <dmalcolm@redhat.com> - 2.1.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Features/Python_2.7/MassRebuild
 
