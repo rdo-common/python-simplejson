@@ -4,8 +4,8 @@
 
 Name:           python-simplejson
 
-Version:        2.1.1
-Release:        4%{?dist}
+Version:        2.1.2
+Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -34,16 +34,17 @@ simplejson is a simple, fast, complete, correct and extensible JSON
 with no dependencies, but includes an optional C extension for a serious speed
 boost.
 
-simplejson is the externally maintained development version of the json library
-included with Python 2.6 and Python 3.0, but maintains backwards compatibility
-with Python 2.5.
-
 The encoder may be subclassed to provide serialization in any kind of
 situation, without any special support by the objects to be serialized
 (somewhat like pickle).
 
 The decoder can handle incoming JSON strings of any specified encoding (UTF-8
 by default).
+
+simplejson is the externally maintained development version of the json library
+included with Python 2.6 and Python 3.0, but maintains backwards compatibility
+with Python 2.5.  It gets updated more regularly than the json module in the
+python stdlib.
 
 
 %prep
@@ -55,14 +56,14 @@ by default).
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
-%{__python} setup.py install --skip-build --root=$RPM_BUILD_ROOT
+rm -rf %{buildroot}
+%{__python} setup.py install --skip-build --root=%{buildroot}
 
 %check
 nosetests -q
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 
 %files
@@ -72,6 +73,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Dec 20 2010 Toshio Kuratomi <toshoi@fedoraproject.org> - 2.1.2-1
+- Update to upstream 2.1.2, a bugfix release with four small, self-contained
+  fixes.
+
 * Wed Oct 20 2010 Toshio Kuratomi <toshoi@fedoraproject.org> - 2.1.1-4
 - Simplify the %%files section to own the tests directory
 - Use the fedora documented filter functions to filter provides
