@@ -4,7 +4,7 @@
 
 Name:           python-simplejson
 
-Version:        2.1.2
+Version:        2.1.3
 Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
@@ -73,6 +73,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Jan 18 2011 Toshio Kuratomi <toshoi@fedoraproject.org> - 2.1.3-1
+- Update to 2.1.3
+
 * Mon Dec 20 2010 Toshio Kuratomi <toshoi@fedoraproject.org> - 2.1.2-1
 - Update to upstream 2.1.2, a bugfix release with four small, self-contained
   fixes.
