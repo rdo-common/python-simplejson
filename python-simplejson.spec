@@ -19,7 +19,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  python-devel
 BuildRequires:  python-setuptools-devel
 BuildRequires:  python-nose
-
+BuildRequires: python-sphinx
 
 # we don't want to provide private python extension libs
 %{?filter_setup:
@@ -53,7 +53,7 @@ python stdlib.
 
 %build
 %{__python} setup.py build
-
+./scripts/make_docs.py
 
 %install
 rm -rf %{buildroot}
