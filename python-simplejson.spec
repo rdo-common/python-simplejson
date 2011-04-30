@@ -76,6 +76,9 @@ rm -rf %{buildroot}
 * Tue Jan 18 2011 Toshio Kuratomi <toshoi@fedoraproject.org> - 2.1.5-1
 - Update to 2.1.5, trivial upstream release (change makes more compact output)
 
+* Wed Feb 09 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.1.3-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
 * Tue Jan 18 2011 Toshio Kuratomi <toshoi@fedoraproject.org> - 2.1.3-1
 - Update to 2.1.3
 
