@@ -4,7 +4,7 @@
 
 Name:           python-simplejson
 
-Version:        2.1.5
+Version:        2.1.6
 Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
@@ -16,7 +16,7 @@ URL:            http://undefined.org/python/#simplejson
 Source0:        http://pypi.python.org/packages/source/s/simplejson/simplejson-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  python-devel
+BuildRequires:  python2-devel
 BuildRequires:  python-setuptools-devel
 BuildRequires:  python-nose
 BuildRequires: python-sphinx
@@ -73,6 +73,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon May 9 2011 Toshio Kuratomi <toshoi@fedoraproject.org> - 2.1.6-1
+- Update to 2.1.6 for a segfault fix
+
 * Sat Apr 30 2011 Toshio Kuratomi <toshoi@fedoraproject.org> - 2.1.5-1
 - Update to 2.1.5, trivial upstream release (change makes more compact output)
 
