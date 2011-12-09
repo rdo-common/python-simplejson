@@ -1,10 +1,10 @@
-%if 0%{?fedora} < 13 || 0%{?rhel} < 6
+%if 0%{?rhel} && 0%{?rhel} < 6
 %{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 %endif
 
 Name:           python-simplejson
 
-Version:        2.1.6
+Version:        2.3.0
 Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
@@ -17,7 +17,7 @@ Source0:        http://pypi.python.org/packages/source/s/simplejson/simplejson-%
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  python2-devel
-BuildRequires:  python-setuptools-devel
+BuildRequires:  python-setuptools
 BuildRequires:  python-nose
 BuildRequires: python-sphinx
 
@@ -73,6 +73,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Dec 9 2011 Toshio Kuratomi <toshoi@fedoraproject.org> - 2.3.0-1
+- Update to 2.3.0 -- behaviour changing bugfixes
+
 * Mon May 9 2011 Toshio Kuratomi <toshoi@fedoraproject.org> - 2.1.6-1
 - Update to 2.1.6 for a segfault fix
 
