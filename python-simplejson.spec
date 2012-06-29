@@ -4,7 +4,7 @@
 
 Name:           python-simplejson
 
-Version:        2.5.2
+Version:        2.6.0
 Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
@@ -73,6 +73,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Jun 29 2012 Toshio Kuratomi <toshio@fedoraproject.org> - 2.6.0-1
+- Update to 2.6.0 which changes some messages thrown by exceptions to match
+  with json module in python3.3 stdlib.  Probably safe for older releases but
+  the python3 version there is 3.2 so there's also not any real need yet.
+
 * Tue May 15 2012 Toshio Kuratomi <toshio@fedoraproject.org> - 2.5.2-1
 - Update to 2.5.2
 - This update adds new PI but should be backwards compatible
