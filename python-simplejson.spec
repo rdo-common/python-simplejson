@@ -2,16 +2,24 @@
 %{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 %endif
 
+# Python3 support is 3.3+ (which was introduced in Fedora 18)
+%if 0%{?fedora} && 0%{?fedora} >= 18
+%global with_python3 1
+%endif
+
+# we don't want to provide private python extension libs
+%global __provides_exclude_from ^(%{python_sitearch}|%{python3_sitearch}).*\\.so$
+
 Name:           python-simplejson
 
-Version:        2.6.0
+Version:        3.1.0
 Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
 # The main code is licensed MIT.
 # The docs include jquery which is licensed MIT or GPLv2
-License: MIT and (MIT or GPLv2)
+License: (MIT or AFL) and (MIT or GPLv2)
 URL:            http://undefined.org/python/#simplejson
 Source0:        http://pypi.python.org/packages/source/s/simplejson/simplejson-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -20,12 +28,11 @@ BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
 BuildRequires:  python-nose
 BuildRequires: python-sphinx
-
-# we don't want to provide private python extension libs
-%{?filter_setup:
-%filter_provides_in %{python_sitearch}/.*\.so$ 
-%filter_setup
-}
+%if 0%{?with_python3}
+BuildRequires: python3-devel
+BuildRequires: python3-setuptools
+BuildRequires: python3-nose
+%endif # with_python3
 
 
 %description
@@ -46,21 +53,70 @@ included with Python 2.6 and Python 3.0, but maintains backwards compatibility
 with Python 2.5.  It gets updated more regularly than the json module in the
 python stdlib.
 
+%if 0%{?with_python3}
+%package -n python3-simplejson
+Summary:        Simple, fast, extensible JSON encoder/decoder for Python3
+Group:          System Environment/Libraries
+
+%description -n python3-simplejson
+simplejson is a simple, fast, complete, correct and extensible JSON
+<http://json.org> encoder and decoder for Python 2.5+ and python3.3+ It is pure
+Python code with no dependencies, but includes an optional C extension for a
+serious speed boost.
+
+The encoder may be subclassed to provide serialization in any kind of
+situation, without any special support by the objects to be serialized
+(somewhat like pickle).
+
+The decoder can handle incoming JSON strings of any specified encoding (UTF-8
+by default).
+
+simplejson is the externally maintained development version of the json library
+included with Python 2.6 and Python 3.0, but maintains backwards compatibility
+with Python 2.5.  It gets updated more regularly than the json module in the
+python stdlib.
+
+%endif # with_python3
 
 %prep
 %setup -q -n simplejson-%{version}
 
+%if 0%{?with_python3}
+rm -rf %{py3dir}
+cp -a . %{py3dir}
+%endif # with_python3
 
 %build
 %{__python} setup.py build
 ./scripts/make_docs.py
 
+%if 0%{?with_python3}
+pushd %{py3dir}
+%{__python3} setup.py build
+popd
+%endif # with_python3
+
 %install
 rm -rf %{buildroot}
 %{__python} setup.py install --skip-build --root=%{buildroot}
 
+rm docs/.buildinfo
+rm docs/.nojekyll
+
+%if 0%{?with_python3}
+pushd %{py3dir}
+%{__python3} setup.py install --skip-build --root=%{buildroot}
+popd
+%endif # with_python3
+
 %check
 nosetests -q
+
+%if 0%{?with_python3}
+pushd %{py3dir}
+nosetests-%{python3_version} -q
+popd
+%endif # with_python3
 
 %clean
 rm -rf %{buildroot}
@@ -71,8 +127,19 @@ rm -rf %{buildroot}
 %doc docs LICENSE.txt
 %{python_sitearch}/*
 
+%if 0%{?with_python3}
+%files -n python3-simplejson
+%defattr(-,root,root,-)
+%doc LICENSE.txt
+%{python3_sitearch}/*
+%endif # python3
 
 %changelog
+* Mon Feb 25 2013 Toshio Kuratomi <toshio@fedoraproject.org> - 3.1.0-1
+- Update to 3.1.0 in Rawhide.
+- Build the python3 subpackage
+- Update to new-style filtering of provides
+
 * Fri Jun 29 2012 Toshio Kuratomi <toshio@fedoraproject.org> - 2.6.0-1
 - Update to 2.6.0 which changes some messages thrown by exceptions to match
   with json module in python3.3 stdlib.  Probably safe for older releases but
