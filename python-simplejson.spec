@@ -7,9 +7,6 @@
 %global with_python3 1
 %endif
 
-# we don't want to provide private python extension libs
-%global __provides_exclude_from ^(%{python_sitearch}|%{python3_sitearch}).*\\.so$
-
 Name:           python-simplejson
 
 Version:        3.1.0
@@ -33,6 +30,9 @@ BuildRequires: python3-devel
 BuildRequires: python3-setuptools
 BuildRequires: python3-nose
 %endif # with_python3
+
+# we don't want to provide private python extension libs
+%global __provides_exclude_from ^(%{python_sitearch}|%{python3_sitearch}).*\\.so$
 
 
 %description
@@ -139,6 +139,12 @@ rm -rf %{buildroot}
 - Update to 3.1.0 in Rawhide.
 - Build the python3 subpackage
 - Update to new-style filtering of provides
+
+* Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.6.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
+* Sat Jul 21 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.6.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
 * Fri Jun 29 2012 Toshio Kuratomi <toshio@fedoraproject.org> - 2.6.0-1
 - Update to 2.6.0 which changes some messages thrown by exceptions to match
