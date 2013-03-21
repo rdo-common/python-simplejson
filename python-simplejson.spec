@@ -9,7 +9,7 @@
 
 Name:           python-simplejson
 
-Version:        3.1.0
+Version:        3.1.2
 Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
@@ -135,6 +135,9 @@ rm -rf %{buildroot}
 %endif # python3
 
 %changelog
+* Thu Mar 21 2013 Toshio Kuratomi <toshio@fedoraproject.org> - 3.1.2-1
+- Update to upstream 3.1.2 (documentation fixes)
+
 * Mon Feb 25 2013 Toshio Kuratomi <toshio@fedoraproject.org> - 3.1.0-1
 - Update to 3.1.0 in Rawhide.
 - Build the python3 subpackage
