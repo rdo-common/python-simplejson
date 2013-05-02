@@ -9,7 +9,7 @@
 
 Name:           python-simplejson
 
-Version:        3.1.3
+Version:        3.2.0
 Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
@@ -135,6 +135,10 @@ rm -rf %{buildroot}
 %endif # python3
 
 %changelog
+* Thu May  2 2013 Toshio Kuratomi <toshio@fedoraproject.org> - 3.2.0-1
+- Trim changelog to 5 years.
+- Update to 3.2.0 upstream feature additions
+
 * Tue Apr  9 2013 Toshio Kuratomi <toshio@fedoraproject.org> - 3.1.3-1
 - Update to upstream 3.1.3
 
@@ -243,48 +247,3 @@ rm -rf %{buildroot}
 
 * Fri Feb  8 2008 Luke Macken <lmacken@redhat.com> - 1.7.3-3
 - Rebuild for gcc 4.3
-
-* Wed Oct 24 2007 Luke Macken <lmacken@redhat.com> - 1.7.3-2
-- Include the LICENSE.txt
-
-* Wed Oct  3 2007 Luke Macken <lmacken@redhat.com> - 1.7.3-1
-- 1.7.3
-
-* Sun Sep  2 2007 Luke Macken <lmacken@redhat.com> - 1.7.1-3
-- Update for python-setuptools changes in rawhide
-
-* Tue Aug 21 2007 Luke Macken <lmacken@redhat.com> - 1.7.1-2
-- Rebuild
-
-* Sun Jul  8 2007 Luke Macken <lmacken@redhat.com> - 1.7.1-1
-- 1.7.1
-
-* Wed Mar 21 2007 Luke Macken <lmacken@redhat.com> - 1.7-2
-- Use python_sitearch instead of sitelib
-
-* Tue Mar 20 2007 Luke Macken <lmacken@redhat.com> - 1.7-1
-- 1.7 (Bug #233212)
-
-* Sat Mar  3 2007 Luke Macken <lmacken@redhat.com> - 1.5
-- 1.5
-
-* Sat Dec  9 2006 Luke Macken <lmacken@redhat.com> - 1.4-4
-- Add python-devel to BuildRequires
-
-* Sat Dec  9 2006 Luke Macken <lmacken@redhat.com> - 1.4-2
-- Rebuild for new python
-
-* Fri Nov 24 2006 Luke Macken <lmacken@redhat.com> - 1.4-1
-- 1.4
-
-* Sun Sep  3 2006 Luke Macken <lmacken@redhat.com> - 1.3-4
-- Rebuild for FC6
-
-* Mon Aug 14 2006 Luke Macken <lmacken@redhat.com> - 1.3-3
-- Include .pyo's instead of just ghosting them
-
-* Wed Jul 12 2006 Luke Macken <lmacken@redhat.com> - 1.3-2
-- Add --single-version-externally-managed flag to install
-
-* Mon Jul 10 2006 Luke Macken <lmacken@redhat.com> - 1.3-1
-- Initial package
