@@ -9,7 +9,7 @@
 
 Name:           python-simplejson
 
-Version:        3.3.3
+Version:        3.4.0
 Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
@@ -135,6 +135,9 @@ rm -rf %{buildroot}
 %endif # python3
 
 %changelog
+* Mon Apr 07 2014 Luke Macken <lmacken@redhat.com> - 3.4.0-1
+- Update to 3.4.0 (#1083979)
+
 * Wed Feb 19 2014 Luke Macken <lmacken@redhat.com> - 3.3.3-1
 - Update to 3.3.3 (#960949)
 
