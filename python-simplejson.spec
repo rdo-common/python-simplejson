@@ -9,8 +9,8 @@
 
 Name:           python-simplejson
 
-Version:        3.4.0
-Release:        3%{?dist}
+Version:        3.5.3
+Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -135,6 +135,9 @@ rm -rf %{buildroot}
 %endif # python3
 
 %changelog
+* Tue Jun 24 2014 Luke Macken <lmacken@redhat.com> - 3.5.3-1
+- Update to 3.5.3 (#1093685, #1112285)
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.4.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
