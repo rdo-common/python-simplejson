@@ -1,7 +1,7 @@
 Name:           python-simplejson
 
-Version:        3.5.3
-Release:        7%{?dist}
+Version:        3.10.0
+Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -9,7 +9,7 @@ Group:          System Environment/Libraries
 # The docs include jquery which is licensed MIT or GPLv2
 License: (MIT or AFL) and (MIT or GPLv2)
 URL:            http://undefined.org/python/#simplejson
-Source0:        http://pypi.python.org/packages/source/s/simplejson/simplejson-%{version}.tar.gz
+Source0:        https://files.pythonhosted.org/packages/source/s/simplejson/simplejson-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # we don't want to provide private python extension libs
@@ -124,6 +124,9 @@ nosetests-%{python3_version} -q
 %{python3_sitearch}/*
 
 %changelog
+* Fri Nov 4 2016 Orion Poplawski <orion@cora.nwra.com> - 3.10.0-1
+- Update to 3.10.0
+
 * Fri Nov 4 2016 Orion Poplawski <orion@cora.nwra.com> - 3.5.3-7
 - Enable python 3 support in EPEL
 - Ship python2-simplejson
