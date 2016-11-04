@@ -42,7 +42,7 @@ BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
 BuildRequires:  python-nose
 BuildRequires:  python-sphinx
-%python_provide python2-simplejson
+%{?python_provide:%python_provide python2-simplejson}
 
 %description -n python2-simplejson
 simplejson is a simple, fast, complete, correct and extensible JSON
@@ -69,7 +69,7 @@ Group:          System Environment/Libraries
 BuildRequires: python%{python3_pkgversion}-devel
 BuildRequires: python%{python3_pkgversion}-setuptools
 BuildRequires: python%{python3_pkgversion}-nose
-%python_provide python%{python3_pkgversion}-simplejson
+%{?python_provide:%python_provide python%{python3_pkgversion}-simplejson}
 
 %description -n python%{python3_pkgversion}-simplejson
 simplejson is a simple, fast, complete, correct and extensible JSON
