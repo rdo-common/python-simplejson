@@ -1,16 +1,7 @@
-%if 0%{?rhel} && 0%{?rhel} < 6
-%{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
-%endif
-
-# Python3 support is 3.3+ (which was introduced in Fedora 18)
-%if 0%{?fedora} && 0%{?fedora} >= 18
-%global with_python3 1
-%endif
-
 Name:           python-simplejson
 
 Version:        3.5.3
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -21,18 +12,8 @@ URL:            http://undefined.org/python/#simplejson
 Source0:        http://pypi.python.org/packages/source/s/simplejson/simplejson-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  python2-devel
-BuildRequires:  python-setuptools
-BuildRequires:  python-nose
-BuildRequires: python-sphinx
-%if 0%{?with_python3}
-BuildRequires: python3-devel
-BuildRequires: python3-setuptools
-BuildRequires: python3-nose
-%endif # with_python3
-
 # we don't want to provide private python extension libs
-%global __provides_exclude_from ^(%{python_sitearch}|%{python3_sitearch}).*\\.so$
+%global __provides_exclude_from ^(%{python2_sitearch}|%{python3_sitearch}).*\\.so$
 
 
 %description
@@ -53,12 +34,44 @@ included with Python 2.6 and Python 3.0, but maintains backwards compatibility
 with Python 2.5.  It gets updated more regularly than the json module in the
 python stdlib.
 
-%if 0%{?with_python3}
-%package -n python3-simplejson
+
+%package -n python2-simplejson
+Summary:        Simple, fast, extensible JSON encoder/decoder for Python2
+Group:          System Environment/Libraries
+BuildRequires:  python2-devel
+BuildRequires:  python-setuptools
+BuildRequires:  python-nose
+BuildRequires:  python-sphinx
+%python_provide python2-simplejson
+
+%description -n python2-simplejson
+simplejson is a simple, fast, complete, correct and extensible JSON
+<http://json.org> encoder and decoder for Python 2.5+. It is pure Python code
+with no dependencies, but includes an optional C extension for a serious speed
+boost.
+
+The encoder may be subclassed to provide serialization in any kind of
+situation, without any special support by the objects to be serialized
+(somewhat like pickle).
+
+The decoder can handle incoming JSON strings of any specified encoding (UTF-8
+by default).
+
+simplejson is the externally maintained development version of the json library
+included with Python 2.6 and Python 3.0, but maintains backwards compatibility
+with Python 2.5.  It gets updated more regularly than the json module in the
+python stdlib.
+
+
+%package -n python%{python3_pkgversion}-simplejson
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python3
 Group:          System Environment/Libraries
+BuildRequires: python%{python3_pkgversion}-devel
+BuildRequires: python%{python3_pkgversion}-setuptools
+BuildRequires: python%{python3_pkgversion}-nose
+%python_provide python%{python3_pkgversion}-simplejson
 
-%description -n python3-simplejson
+%description -n python%{python3_pkgversion}-simplejson
 simplejson is a simple, fast, complete, correct and extensible JSON
 <http://json.org> encoder and decoder for Python 2.5+ and python3.3+ It is pure
 Python code with no dependencies, but includes an optional C extension for a
@@ -76,65 +89,46 @@ included with Python 2.6 and Python 3.0, but maintains backwards compatibility
 with Python 2.5.  It gets updated more regularly than the json module in the
 python stdlib.
 
-%endif # with_python3
 
 %prep
 %setup -q -n simplejson-%{version}
 
-%if 0%{?with_python3}
-rm -rf %{py3dir}
-cp -a . %{py3dir}
-%endif # with_python3
-
 %build
-%{__python} setup.py build
+%py2_build
 ./scripts/make_docs.py
 
-%if 0%{?with_python3}
-pushd %{py3dir}
-%{__python3} setup.py build
-popd
-%endif # with_python3
+%py3_build
 
 %install
-rm -rf %{buildroot}
-%{__python} setup.py install --skip-build --root=%{buildroot}
+%py2_install
 
 rm docs/.buildinfo
 rm docs/.nojekyll
 
-%if 0%{?with_python3}
-pushd %{py3dir}
-%{__python3} setup.py install --skip-build --root=%{buildroot}
-popd
-%endif # with_python3
+%py3_install
 
 %check
 nosetests -q
 
-%if 0%{?with_python3}
-pushd %{py3dir}
 nosetests-%{python3_version} -q
-popd
-%endif # with_python3
-
-%clean
-rm -rf %{buildroot}
 
 
-%files
-%defattr(-,root,root,-)
-%doc docs LICENSE.txt
-%{python_sitearch}/*
+%files -n python2-simplejson
+%license LICENSE.txt
+%doc docs
+%{python2_sitearch}/*
 
-%if 0%{?with_python3}
-%files -n python3-simplejson
-%defattr(-,root,root,-)
-%doc LICENSE.txt
+%files -n python%{python3_pkgversion}-simplejson
+%license LICENSE.txt
+%doc docs
 %{python3_sitearch}/*
-%endif # python3
 
 %changelog
+* Fri Nov 4 2016 Orion Poplawski <orion@cora.nwra.com> - 3.5.3-7
+- Enable python 3 support in EPEL
+- Ship python2-simplejson
+- Modernize spec
+
 * Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.5.3-6
 - https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
