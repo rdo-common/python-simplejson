@@ -1,7 +1,7 @@
 Name:           python-simplejson
 
 Version:        3.10.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -124,6 +124,9 @@ nosetests-%{python3_version} -q
 %{python3_sitearch}/*
 
 %changelog
+* Tue Dec 13 2016 Stratakis Charalampos <cstratak@redhat.com> - 3.10.0-2
+- Rebuild for Python 3.6
+
 * Fri Nov 4 2016 Orion Poplawski <orion@cora.nwra.com> - 3.10.0-1
 - Update to 3.10.0
 
