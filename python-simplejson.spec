@@ -10,7 +10,6 @@ Group:          System Environment/Libraries
 License: (MIT or AFL) and (MIT or GPLv2)
 URL:            http://undefined.org/python/#simplejson
 Source0:        https://files.pythonhosted.org/packages/source/s/simplejson/simplejson-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # we don't want to provide private python extension libs
 %global __provides_exclude_from ^(%{python2_sitearch}|%{python3_sitearch}).*\\.so$
