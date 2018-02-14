@@ -1,7 +1,7 @@
 Name:           python-simplejson
 
 Version:        3.10.0
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -38,9 +38,9 @@ python stdlib.
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python2
 Group:          System Environment/Libraries
 BuildRequires:  python2-devel
-BuildRequires:  python-setuptools
-BuildRequires:  python-nose
-BuildRequires:  python-sphinx
+BuildRequires:  python2-setuptools
+BuildRequires:  python2-nose
+BuildRequires:  python2-sphinx
 %{?python_provide:%python_provide python2-simplejson}
 
 %description -n python2-simplejson
@@ -123,6 +123,10 @@ nosetests-%{python3_version} -q
 %{python3_sitearch}/*
 
 %changelog
+* Wed Feb 14 2018 Iryna Shcherbina <ishcherb@redhat.com> - 3.10.0-7
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.10.0-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
