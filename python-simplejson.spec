@@ -1,7 +1,7 @@
 Name:           python-simplejson
 
 Version:        3.10.0
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -40,7 +40,6 @@ Group:          System Environment/Libraries
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 BuildRequires:  python2-nose
-BuildRequires:  python2-sphinx
 %{?python_provide:%python_provide python2-simplejson}
 
 %description -n python2-simplejson
@@ -68,6 +67,7 @@ Group:          System Environment/Libraries
 BuildRequires: python%{python3_pkgversion}-devel
 BuildRequires: python%{python3_pkgversion}-setuptools
 BuildRequires: python%{python3_pkgversion}-nose
+BuildRequires: python%{python3_pkgversion}-sphinx
 %{?python_provide:%python_provide python%{python3_pkgversion}-simplejson}
 
 %description -n python%{python3_pkgversion}-simplejson
@@ -94,9 +94,9 @@ python stdlib.
 
 %build
 %py2_build
-./scripts/make_docs.py
-
 %py3_build
+
+PATH=%{_libexecdir}/python3-sphinx:$PATH %{__python3} scripts/make_docs.py
 
 %install
 %py2_install
@@ -123,6 +123,9 @@ nosetests-%{python3_version} -q
 %{python3_sitearch}/*
 
 %changelog
+* Mon Jul  2 2018 Miro Hrončok <mhroncok@redhat.com> - 3.10.0-9
+- Use Python 3 Sphinx
+
 * Sun Jun 17 2018 Miro Hrončok <mhroncok@redhat.com> - 3.10.0-8
 - Rebuilt for Python 3.7
 
