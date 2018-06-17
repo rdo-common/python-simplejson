@@ -1,7 +1,7 @@
 Name:           python-simplejson
 
 Version:        3.10.0
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 Group:          System Environment/Libraries
@@ -123,6 +123,9 @@ nosetests-%{python3_version} -q
 %{python3_sitearch}/*
 
 %changelog
+* Sun Jun 17 2018 Miro Hrončok <mhroncok@redhat.com> - 3.10.0-8
+- Rebuilt for Python 3.7
+
 * Wed Feb 14 2018 Iryna Shcherbina <ishcherb@redhat.com> - 3.10.0-7
 - Update Python 2 dependency declarations to new packaging standards
   (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
