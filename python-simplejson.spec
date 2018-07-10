@@ -37,6 +37,7 @@ python stdlib.
 %package -n python2-simplejson
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python2
 Group:          System Environment/Libraries
+BuildRequires:  gcc
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 BuildRequires:  python2-nose
