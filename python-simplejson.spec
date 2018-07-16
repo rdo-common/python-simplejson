@@ -1,3 +1,7 @@
+%if 0%{?fedora} || 0%{?rhel} > 7
+%global with_python3 1
+%endif
+
 Name:           python-simplejson
 
 Version:        3.10.0
@@ -62,6 +66,7 @@ with Python 2.5.  It gets updated more regularly than the json module in the
 python stdlib.
 
 
+%if 0%{?with_python3}
 %package -n python%{python3_pkgversion}-simplejson
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python3
 Group:          System Environment/Libraries
@@ -87,6 +92,7 @@ simplejson is the externally maintained development version of the json library
 included with Python 2.6 and Python 3.0, but maintains backwards compatibility
 with Python 2.5.  It gets updated more regularly than the json module in the
 python stdlib.
+%endif
 
 
 %prep
@@ -96,7 +102,9 @@ python stdlib.
 %py2_build
 ./scripts/make_docs.py
 
+%if 0%{?with_python3}
 %py3_build
+%endif
 
 %install
 %py2_install
@@ -104,12 +112,16 @@ python stdlib.
 rm docs/.buildinfo
 rm docs/.nojekyll
 
+%if 0%{?with_python3}
 %py3_install
+%endif
 
 %check
 nosetests -q
 
+%if 0%{?with_python3}
 nosetests-%{python3_version} -q
+%endif
 
 
 %files -n python2-simplejson
@@ -117,10 +129,12 @@ nosetests-%{python3_version} -q
 %doc docs
 %{python2_sitearch}/*
 
+%if 0%{?with_python3}
 %files -n python%{python3_pkgversion}-simplejson
 %license LICENSE.txt
 %doc docs
 %{python3_sitearch}/*
+%endif
 
 %changelog
 * Wed Feb 14 2018 Iryna Shcherbina <ishcherb@redhat.com> - 3.10.0-7
