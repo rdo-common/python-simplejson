@@ -1,18 +1,14 @@
 Name:           python-simplejson
 
-Version:        3.10.0
-Release:        10%{?dist}
+Version:        3.16.0
+Release:        1%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
-Group:          System Environment/Libraries
 # The main code is licensed MIT.
 # The docs include jquery which is licensed MIT or GPLv2
 License: (MIT or AFL) and (MIT or GPLv2)
 URL:            http://undefined.org/python/#simplejson
-Source0:        https://files.pythonhosted.org/packages/source/s/simplejson/simplejson-%{version}.tar.gz
-
-# we don't want to provide private python extension libs
-%global __provides_exclude_from ^(%{python2_sitearch}|%{python3_sitearch}).*\\.so$
+Source0:        %pypi_source simplejson
 
 
 %description
@@ -36,7 +32,6 @@ python stdlib.
 
 %package -n python2-simplejson
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python2
-Group:          System Environment/Libraries
 BuildRequires:  gcc
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
@@ -64,7 +59,6 @@ python stdlib.
 
 %package -n python%{python3_pkgversion}-simplejson
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python3
-Group:          System Environment/Libraries
 BuildRequires: python%{python3_pkgversion}-devel
 BuildRequires: python%{python3_pkgversion}-setuptools
 BuildRequires: python%{python3_pkgversion}-nose
@@ -99,31 +93,34 @@ python stdlib.
 
 PATH=%{_libexecdir}/python3-sphinx:$PATH %{__python3} scripts/make_docs.py
 
-%install
-%py2_install
-
 rm docs/.buildinfo
 rm docs/.nojekyll
 
+%install
+%py2_install
 %py3_install
 
 %check
-nosetests -q
-
-nosetests-%{python3_version} -q
+%{__python2} -m nose
+%{__python3} -m nose
 
 
 %files -n python2-simplejson
 %license LICENSE.txt
 %doc docs
-%{python2_sitearch}/*
+%{python2_sitearch}/simplejson/
+%{python2_sitearch}/simplejson-%{version}-py?.?.egg-info/
 
 %files -n python%{python3_pkgversion}-simplejson
 %license LICENSE.txt
 %doc docs
-%{python3_sitearch}/*
+%{python3_sitearch}/simplejson/
+%{python3_sitearch}/simplejson-%{version}-py?.?.egg-info/
 
 %changelog
+* Thu Aug 23 2018 Miro Hrončok <mhroncok@redhat.com> - 3.16.0-1
+- Update to 3.16.0 (#1462583)
+
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.10.0-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
