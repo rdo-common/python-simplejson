@@ -1,3 +1,7 @@
+# Build conditions for bootstrapping purposes
+%bcond_without docs
+%bcond_without tests
+
 Name:           python-simplejson
 
 Version:        3.16.0
@@ -35,7 +39,9 @@ Summary:        Simple, fast, extensible JSON encoder/decoder for Python2
 BuildRequires:  gcc
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
+%if %{with tests}
 BuildRequires:  python2-nose
+%endif
 %{?python_provide:%python_provide python2-simplejson}
 
 %description -n python2-simplejson
@@ -61,8 +67,12 @@ python stdlib.
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python3
 BuildRequires: python%{python3_pkgversion}-devel
 BuildRequires: python%{python3_pkgversion}-setuptools
+%if %{with tests}
 BuildRequires: python%{python3_pkgversion}-nose
+%endif
+%if %{with docs}
 BuildRequires: python%{python3_pkgversion}-sphinx
+%endif
 %{?python_provide:%python_provide python%{python3_pkgversion}-simplejson}
 
 %description -n python%{python3_pkgversion}-simplejson
@@ -91,29 +101,36 @@ python stdlib.
 %py2_build
 %py3_build
 
+%if %{with docs}
 PATH=%{_libexecdir}/python3-sphinx:$PATH %{__python3} scripts/make_docs.py
 
 rm docs/.buildinfo
 rm docs/.nojekyll
+%endif
 
 %install
 %py2_install
 %py3_install
 
+%if %{with tests}
 %check
 %{__python2} -m nose
 %{__python3} -m nose
-
+%endif
 
 %files -n python2-simplejson
 %license LICENSE.txt
+%if %{with docs}
 %doc docs
+%endif
 %{python2_sitearch}/simplejson/
 %{python2_sitearch}/simplejson-%{version}-py?.?.egg-info/
 
 %files -n python%{python3_pkgversion}-simplejson
 %license LICENSE.txt
+%if %{with docs}
 %doc docs
+%endif
 %{python3_sitearch}/simplejson/
 %{python3_sitearch}/simplejson-%{version}-py?.?.egg-info/
 
