@@ -5,7 +5,7 @@
 Name:           python-simplejson
 
 Version:        3.16.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 # The main code is licensed MIT.
@@ -135,6 +135,9 @@ rm docs/.nojekyll
 %{python3_sitearch}/simplejson-%{version}-py?.?.egg-info/
 
 %changelog
+* Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.16.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.16.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
