@@ -5,7 +5,7 @@
 Name:           python-simplejson
 
 Version:        3.16.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python
 
 # The main code is licensed MIT.
@@ -135,6 +135,9 @@ rm docs/.nojekyll
 %{python3_sitearch}/simplejson-%{version}-py?.?.egg-info/
 
 %changelog
+* Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 3.16.0-5
+- Rebuilt for Python 3.8.0rc1 (#1748018)
+
 * Fri Aug 16 2019 Miro Hrončok <mhroncok@redhat.com> - 3.16.0-4
 - Rebuilt for Python 3.8
 
