@@ -1,5 +1,11 @@
+%if 0%{?rhel} > 7
+%bcond_without python3
+%else
+%bcond_with python3
+%endif
 # Build conditions for bootstrapping purposes
-%bcond_without docs
+# needs python3-sphinx, so disabling
+%bcond_with docs
 %bcond_without tests
 
 Name:           python-simplejson
@@ -63,6 +69,7 @@ with Python 2.5.  It gets updated more regularly than the json module in the
 python stdlib.
 
 
+%if %{with python3}
 %package -n python%{python3_pkgversion}-simplejson
 Summary:        Simple, fast, extensible JSON encoder/decoder for Python3
 BuildRequires: python%{python3_pkgversion}-devel
@@ -92,6 +99,7 @@ simplejson is the externally maintained development version of the json library
 included with Python 2.6 and Python 3.0, but maintains backwards compatibility
 with Python 2.5.  It gets updated more regularly than the json module in the
 python stdlib.
+%endif
 
 
 %prep
@@ -99,7 +107,9 @@ python stdlib.
 
 %build
 %py2_build
+%if %{with python3}
 %py3_build
+%endif
 
 %if %{with docs}
 PATH=%{_libexecdir}/python3-sphinx:$PATH %{__python3} scripts/make_docs.py
@@ -110,12 +120,16 @@ rm docs/.nojekyll
 
 %install
 %py2_install
+%if %{with python3}
 %py3_install
+%endif
 
 %if %{with tests}
 %check
 %{__python2} -m nose
+%if %{with python3}
 %{__python3} -m nose
+%endif
 %endif
 
 %files -n python2-simplejson
@@ -126,6 +140,7 @@ rm docs/.nojekyll
 %{python2_sitearch}/simplejson/
 %{python2_sitearch}/simplejson-%{version}-py?.?.egg-info/
 
+%if %{with python3}
 %files -n python%{python3_pkgversion}-simplejson
 %license LICENSE.txt
 %if %{with docs}
@@ -133,6 +148,7 @@ rm docs/.nojekyll
 %endif
 %{python3_sitearch}/simplejson/
 %{python3_sitearch}/simplejson-%{version}-py?.?.egg-info/
+%endif
 
 %changelog
 * Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 3.16.0-5
